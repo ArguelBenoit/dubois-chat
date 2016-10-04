@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Messagerie Dubois</title>
+  <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+  <script src="/socket.io/socket.io.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
+  <link rel="stylesheet" type="text/css" href="/style/skeleton.css"/>
+  <link rel="stylesheet" type="text/css" href="/style/style.css"/>
+  <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+
+  <div class="container">
+    <section class="header" style="margin: 30px 0;">
+      <div>
+        <img src="img/feather.svg" />
+      </div>
+      <h2>Messagerie instantanée Dubois</h2>
+    </section>
+    <section id="zone_chat"></section>
+    <section id="form">
+      <div class="row">
+        <form action="/" method="post" id="formulaire_chat">
+          <div class="twelve columns">
+            <!-- <label>Prénom</label> -->
+            <input class="u-full-width" type="text" name="pseudo" id="pseudo" placeholder="Votre prénom" size="50" autofocus />
+          </div>
+          <div class="twelve columns">
+            <!-- <label>Message</label> -->
+            <textarea class="u-full-width" id="message" placeholder="Votre message..." size="50"></textarea>
+          </div>
+          <input class="button-primary" type="submit" id="envoi_message" value="Envoyer" />
+        </form>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    var socket = io.connect('http://localhost:8080');
+    socket.on('message', function(data) {
+      insereMessage(data.pseudo, data.message)
+    })
+    $('#formulaire_chat').submit(function () {
+      var pseudo = $('#pseudo').val();
+      var message = $('#message').val();
+      socket.emit('message', message);
+      insereMessage(pseudo, message);
+      $('#message').val('').focus();
+      return false;
+    });
+    function insereMessage(pseudo, message) {
+      $('#zone_chat').append('<p><strong>' + pseudo + ' ' + '</strong> <i class="fa fa-comment-o" aria-hidden="true"></i></br>' + message + '</p>');
+    }
+  </script>
+</body>
+</html>
