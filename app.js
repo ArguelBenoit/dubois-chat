@@ -7,7 +7,7 @@ var express = require('express'),
 app.use(express.static('public'));
 
 io.on('connection', function (socket) {
-  socket.on('message', function (message) {
-    socket.broadcast.emit('message', {pseudo: socket.pseudo, message: message});
+  socket.on('message', function (data) {
+    socket.broadcast.emit('message', {pseudo: data.pseudo, message: data.message});
   });
 });
