@@ -1,28 +1,87 @@
-* { font-family: "Raleway", "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif; }
-.header h2 {
-  text-align: center;
-  margin-top: 20px;
+* { font-family:
+    "Raleway",
+    "HelveticaNeue",
+    "Helvetica Neue",
+    Helvetica,
+    Arial,
+    sans-serif;
 }
-.header div img {
-  margin: auto;
-  transform: rotateZ(-45deg);
-  display: block;
+html, body {
+  height: 100%;
+  overflow: hidden;
+  margin: 0 0;
+  padding: 0 0;
 }
-section#zone_chat { padding-bottom: 30px; }
-section#zone_chat p {
+
+
+
+header img {
+  margin: 5px 0 0 0;
+  opacity: 0.9;
+}
+header h3 {
+  width: 330px;
+  margin: 2px 0 0 10px;
+  opacity: 0.9;
+}
+header {
+  z-index: 1;
+  height: 50px;
+  width: 100%;
+  position: fixed;
+  background: white /*#f1f1f1*/;
+  border-bottom: 1px solid #e5e5e5;
+}
+@media only screen and (max-device-width: 480px) {
+  header h3 {
+    width: 230px;
+    font-size: 25px;
+    margin-top: 9px;
+  }
+}
+
+
+
+#zone_chat {
+  padding: 80px 0 150px 0;
+  max-height: 100%;
+  overflow: auto;
+}
+#zone_chat p:last-child { margin-bottom: 0px; }
+#zone_chat p strong,
+#zone_chat p i {
+  color: #1EAEDB;
+  font-size: 16px;
+}
+#zone_chat p {
+  border: 1px solid #e2e2e2;
+  border-left: 3px solid rgba(255, 0, 0, 0.5);
   padding: 10px;
   background: #f9f9f9;
   border-radius: 2px;
   margin-bottom: 8px;
+  animation-name: pop-animation;
+  animation-duration: 1000ms;
 }
-section#zone_chat p strong,
-section#zone_chat p i {
-  color: #1EAEDB;
-  font-size: 16px;
+@keyframes pop-animation {
+  from { border-left: 12px solid rgba(255, 0, 0, 1); opacity: 0; };
+  to { border-left: 3px solid rgba(255, 0, 0, 0.5);  opacity: 1; };
 }
-section#zone_chat p:last-child {
-  margin-bottom: 0px;
+
+
+
+#form textarea { margin-bottom: 5px; }
+#form form { margin-bottom: 0px; }
+#form {
+  background: white;
+  width: 100%;
+  padding-top: 12px;
+  border-top: solid 1px #e2e2e2;
+  position: absolute;
+  bottom: 0px;
 }
-.container {
-  padding: 0 5px;
+@media only screen and (max-device-width: 480px) {
+  #form input {
+    width: 100%;
+  }
 }
