@@ -1,6 +1,7 @@
 var express = require('express'),
     socketio = require('socket.io'),
     app = express(),
+    redis = require('redis'),
     server = app.listen(8080),
     io = socketio.listen(server);
 

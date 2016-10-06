@@ -13,6 +13,7 @@ html, body {
 
 
 
+
 header img {
   margin: 5px 0 0 0;
   opacity: 0.9;
@@ -25,6 +26,7 @@ header h3 {
 header {
   z-index: 1;
   height: 50px;
+  min-width: 450px;
   width: 100%;
   position: fixed;
   background: white;
@@ -37,6 +39,7 @@ header {
     margin-top: 9px;
   }
 }
+
 
 
 
@@ -59,8 +62,12 @@ header {
   margin-bottom: 8px;
   animation-duration: 1000ms;
 }
-#zone_chat p span {
-  font-weight: bolder;
+#zone_chat p .span-target { font-weight: bolder; }
+#zone_chat p .date {
+   opacity:0.5;
+   font-weight: lighter;
+   font-family: arial;
+   font-size: 13px;
 }
 #zone_chat p.p-other-users {
   border-right: 4px solid rgba(0, 155, 0, 1);
@@ -91,6 +98,9 @@ header {
   from { border-right: 12px solid rgba(255, 0, 0, 0.5); opacity: 0; };
   to { border-right: 4px solid rgba(255, 0, 0, 0.5);  opacity: 1; };
 }
+
+
+
 
 
 #form textarea { margin-bottom: 5px; }
