@@ -7,8 +7,6 @@
     sans-serif;
 }
 html, body {
-  height: 100%;
-  overflow: hidden;
   margin: 0 0;
   padding: 0 0;
 }
@@ -83,7 +81,6 @@ header {
 #zone_chat p.message-for-me, #zone_chat p.important {
   border: 1px solid rgba(255, 0, 0, 0.5);
   border-right: 4px solid rgba(255, 0, 0, 0.5);
-  background: white;
   animation-name: pop-animation-for-me;
 }
 #zone_chat p.important {
@@ -103,7 +100,7 @@ header {
   width: 100%;
   padding-top: 12px;
   border-top: solid 1px #e2e2e2;
-  position: absolute;
+  position: fixed;
   bottom: 0px;
 }
 @media only screen and (max-device-width: 480px) {
