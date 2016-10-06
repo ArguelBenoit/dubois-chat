@@ -1,6 +1,10 @@
-
 var socket = io.connect('http://localhost:8080');
 var pseudo = prompt('Quel est votre pseudo ?');
+
+socket.on('sendAllMessages', function(data) {
+  insereMessage(data.pseudo, (data.message).split("\n").join('<br/>'));
+});
+
 socket.on('message', function(data) {
   insereMessage(data.pseudo, (data.message).split("\n").join('<br/>'));
 });
@@ -15,6 +19,7 @@ $('#formulaire_chat').submit(function () {
   $('#message').val('').focus();
   return false;
 });
+
 
 
 function insereMessage(thisPseudo, message) {
