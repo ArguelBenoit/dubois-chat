@@ -29,7 +29,7 @@ header {
   height: 50px;
   width: 100%;
   position: fixed;
-  background: white /*#f1f1f1*/;
+  background: white;
   border-bottom: 1px solid #e5e5e5;
 }
 @media only screen and (max-device-width: 480px) {
@@ -48,26 +48,52 @@ header {
   overflow: auto;
 }
 #zone_chat p:last-child { margin-bottom: 0px; }
-#zone_chat p strong,
-#zone_chat p i {
-  color: #1EAEDB;
+#zone_chat p strong {
   font-size: 16px;
 }
+#zone_chat p strong.my { color: #1EAEDB; }
+#zone_chat p strong.other { color: rgba(0, 155, 0, 1);}
+#zone_chat p strong.important { color: rgba(255, 0, 0, 0.5);}
 #zone_chat p {
-  border: 1px solid #e2e2e2;
-  border-left: 3px solid rgba(255, 0, 0, 0.5);
   padding: 10px;
-  background: #f9f9f9;
+  background: #f3f3f3;
   border-radius: 2px;
   margin-bottom: 8px;
-  animation-name: pop-animation;
   animation-duration: 1000ms;
 }
-@keyframes pop-animation {
-  from { border-left: 12px solid rgba(255, 0, 0, 1); opacity: 0; };
-  to { border-left: 3px solid rgba(255, 0, 0, 0.5);  opacity: 1; };
+#zone_chat p span {
+  font-weight: bolder;
 }
-
+#zone_chat p.p-other-users {
+  border-right: 4px solid rgba(0, 155, 0, 1);
+  animation-name: pop-animation-other-users;
+}
+@keyframes pop-animation-other-users {
+  from { border-right: 12px solid rgba(0, 155, 0, 1); opacity: 0; };
+  to { border-right: 4px solid rgba(0, 155, 0, 1);  opacity: 1; };
+}
+#zone_chat p.p-my-user {
+  border-left: 4px solid #1EAEDB;
+  animation-name: pop-animation-my-users;
+}
+@keyframes pop-animation-my-users {
+  from { border-left: 12px solid #1EAEDB; opacity: 0; };
+  to { border-left: 4px solid #1EAEDB;  opacity: 1; };
+}
+#zone_chat p.message-for-me, #zone_chat p.important {
+  border: 1px solid rgba(255, 0, 0, 0.5);
+  border-right: 4px solid rgba(255, 0, 0, 0.5);
+  background: white;
+  animation-name: pop-animation-for-me;
+}
+#zone_chat p.important {
+  background: #e6e6e6;
+  border: 4px solid rgba(255, 0, 0, 0.5);
+}
+@keyframes pop-animation-for-me {
+  from { border-right: 12px solid rgba(255, 0, 0, 0.5); opacity: 0; };
+  to { border-right: 4px solid rgba(255, 0, 0, 0.5);  opacity: 1; };
+}
 
 
 #form textarea { margin-bottom: 5px; }
