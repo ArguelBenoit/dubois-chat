@@ -1,8 +1,8 @@
 var socket = io.connect('http://localhost:8080');
 var pseudo = prompt('Quel est votre pseudo ?');
+document.title = pseudo;
 
-function insereFormatMessage(thisPseudo, message) {
-  var dateMessage = moment().format(' DD/MM  HH:mm');
+function insereFormatMessage(thisPseudo, message, dateMessage) {
   var forMeOrNot = message.indexOf('@'+ pseudo);
   var important = message.indexOf('@important');
   message = (message).split("&#10;").join('<br/>');
@@ -23,11 +23,11 @@ function insereFormatMessage(thisPseudo, message) {
 }
 
 socket.on('sendAllMessages', function(data) {
-  insereFormatMessage(data.pseudo, data.message);
+  insereFormatMessage(data.pseudo, data.message, data.date);
 });
 
 socket.on('message', function(data) {
-  insereFormatMessage(data.pseudo, data.message);
+  insereFormatMessage(data.pseudo, data.message, data.date);
 });
 
 $('#formulaire_chat').submit(function () {
