@@ -4,35 +4,68 @@ html, body {
   padding: 0 0;
   background: #f5f5f5;
 }
+@media only screen and (max-device-width: 480px) {
+  .container { padding: 0 12px; }
+}
 
 
-header img {
-  margin: 5px 0 0 0;
-  opacity: 0.9;
-}
-header h3 {
-  width: 330px;
-  margin: 2px 0 0 10px;
-  opacity: 0.9;
-}
+
 header {
   z-index: 1;
   height: 50px;
-  min-width: 450px;
+  min-width: 650px;
   width: 100%;
   position: fixed;
   background: white;
   box-shadow: 0px 1px 7px #f5f5f5;
   border-bottom: 1px solid #d6d6d6;
 }
-header.disconnect
+header .feather {
+  margin: 5px 0 0 0;
+  opacity: 0.9;
+}
+header #disconnect {
+  margin: 10px 0 0 0;
+  opacity: 0.7;
+  display: inline-flex;
+  cursor: pointer;
+  padding: 3px 8px;
+  transition-duration: 200ms;
+  border-radius: 2px;
+  border: 1px solid #c7c7c7;
+  font-size: 15px;
+}
+header #disconnect:hover { border: 1px solid rgba(255, 0, 0, 0.6); }
+header #disconnect span { margin-right: 8px; }
+header #disconnect img { margin-top: 5px; }
+header h3 {
+  width: 330px;
+  margin: 2px 0 0 10px;
+  opacity: 0.9;
+}
 @media only screen and (max-device-width: 480px) {
+  header {
+    height: 44px;
+    min-width: 0px;
+  }
+  header #disconnect span {  display: none; }
+  header #disconnect img { margin: 0 0; }
+  header #disconnect {
+    padding: 6px 6px;
+    margin-top: 8px;
+  }
+  header .feather {
+    width: 30px;
+    height: 30px;
+    margin-top: 6px;
+  }
   header h3 {
-    width: 230px;
+    width: 215px;
     font-size: 25px;
-    margin-top: 9px;
+    margin-top: 5px;
   }
 }
+
 
 
 #zone_chat {
@@ -56,7 +89,6 @@ header.disconnect
   border-radius: 3px;
   animation-duration: 1000ms;
 }
-#zone_chat p .span-target { font-weight: bolder; }
 #zone_chat p .date {
    opacity:0.5;
    font-weight: lighter;
@@ -84,9 +116,7 @@ header.disconnect
   border-right: 4px solid rgba(255, 0, 0, 0.5);
   animation-name: pop-animation-for-me;
 }
-#zone_chat p.important {
-  border: 4px solid rgba(255, 0, 0, 0.5);
-}
+#zone_chat p.important { border: 4px solid rgba(255, 0, 0, 0.5) !important; }
 @keyframes pop-animation-for-me {
   from { border-right: 12px solid rgba(255, 0, 0, 0.5); opacity: 0; };
   to { border-right: 4px solid rgba(255, 0, 0, 0.5);  opacity: 1; };

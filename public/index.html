@@ -5,8 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
     <title>Messagerie Dubois</title>
     <script src="/socket.io/socket.io.js"></script>
-    <script type="text/javascript" src="js/moment.js"></script>
-    <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.css" rel="stylesheet" type="text/css">
     <link rel="icon" type="image/png" href="img/feather55x55.png" />
     <link rel="stylesheet" type="text/css" href="/style/skeleton.css"/>
@@ -17,8 +16,9 @@
 
     <header>
       <div class="container">
-        <img class="u-pull-left" src="img/feather100x100.png" width="40px" height="40px"/>
+        <img class="u-pull-left feather" src="img/feather100x100.png" width="40px" height="40px"/>
         <h3 class="u-pull-left">Messagerie Dubois</h3>
+        <div id="disconnect" class="u-pull-right"></div>
       </div>
     </header>
 
@@ -34,7 +34,7 @@
           <div class="twelve columns">
             <textarea class="u-full-width" id="message" placeholder="Votre message..."></textarea>
           </div>
-          <input class="button-primary" type="submit" id="envoi_message" value="Envoyer" />
+          <input class="button-primary u-pull-left" type="submit" id="envoi_message" value="Envoyer" />
         </form>
       </div>
     </div>
