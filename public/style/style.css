@@ -1,17 +1,9 @@
-* { font-family:
-    "Raleway",
-    "HelveticaNeue",
-    "Helvetica Neue",
-    Helvetica,
-    Arial,
-    sans-serif;
-}
+* { font-family: "Raleway", "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif; }
 html, body {
   margin: 0 0;
   padding: 0 0;
+  background: #f5f5f5;
 }
-
-
 
 
 header img {
@@ -30,8 +22,10 @@ header {
   width: 100%;
   position: fixed;
   background: white;
-  border-bottom: 1px solid #e5e5e5;
+  box-shadow: 0px 1px 7px #f5f5f5;
+  border-bottom: 1px solid #d6d6d6;
 }
+header.disconnect
 @media only screen and (max-device-width: 480px) {
   header h3 {
     width: 230px;
@@ -39,8 +33,6 @@ header {
     margin-top: 9px;
   }
 }
-
-
 
 
 #zone_chat {
@@ -56,10 +48,12 @@ header {
 #zone_chat p strong.other { color: rgba(0, 155, 0, 1);}
 #zone_chat p strong.important { color: rgba(255, 0, 0, 0.5);}
 #zone_chat p {
+  border: solid 1px #efefef;
+  border-bottom: solid 1px #d6d6d6;
   padding: 10px;
-  background: #f3f3f3;
-  border-radius: 2px;
+  background: white;
   margin-bottom: 8px;
+  border-radius: 3px;
   animation-duration: 1000ms;
 }
 #zone_chat p .span-target { font-weight: bolder; }
@@ -91,7 +85,6 @@ header {
   animation-name: pop-animation-for-me;
 }
 #zone_chat p.important {
-  background: #e6e6e6;
   border: 4px solid rgba(255, 0, 0, 0.5);
 }
 @keyframes pop-animation-for-me {
@@ -102,14 +95,13 @@ header {
 
 
 
-
 #form textarea { margin-bottom: 5px; }
 #form form { margin-bottom: 0px; }
 #form {
   background: white;
   width: 100%;
   padding-top: 12px;
-  border-top: solid 1px #e2e2e2;
+  border-top: solid 1px #d6d6d6;
   position: fixed;
   bottom: 0px;
 }

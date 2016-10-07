@@ -2,6 +2,7 @@
   "name": "chat",
   "version": "0.1.0",
   "dependencies": {
+    "ent": "^2.2.0",
     "express": "^3.21.2",
     "redis": "^2.6.2",
     "socket.io": "^1.2.1"
