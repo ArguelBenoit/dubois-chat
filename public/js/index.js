@@ -1,7 +1,6 @@
-var socket = io.connect('http://localhost:8080');
-var pseudo = prompt('Quel est votre pseudo ?');
-document.title = pseudo;
 
+var socket = io.connect('http://'+ window.location.hostname +':8080/');
+pseudo = prompt('pseudo');
 
 $('#disconnect').html( '<span>' + pseudo + ' ' +'</span><img src="img/cross.png" height="14px" width="14px"/>' );
 $('#disconnect').on('click', function() { location.reload(); });
@@ -33,6 +32,8 @@ socket.on('sendAllMessages', function(data) {
 socket.on('message', function(data) {
   insereFormatMessage(data.pseudo, data.message, data.date);
 });
+
+
 $('#formulaire_chat').submit(function () {
   var message = $('#message').val();
   if(message) {
@@ -42,4 +43,10 @@ $('#formulaire_chat').submit(function () {
   }
   $('#message').val('').focus();
   return false;
+});
+
+
+$('#formulaire_login').submit(function () {
+  var pseudo = $('#message').val();
+
 });

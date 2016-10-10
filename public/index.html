@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
-    <title>Messagerie Dubois</title>
+    <title>Dubois Messagerie</title>
     <script src="/socket.io/socket.io.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.css" rel="stylesheet" type="text/css">
@@ -14,10 +14,21 @@
   </head>
   <body id="body">
 
+    <div id="cover-login">
+      <div id="login">
+        <h4>Dubois Messagerie</h4>
+        <form action="/" method="post" id="formulaire_login">
+          <input class="u-full-width" placeholder="Prénom"></input>
+          <input class="u-full-width" placeholder="Code personel"></input>
+          <input class="button-primary u-full-width" type="submit" id="connect" value="Connexion" />
+        </form>
+      </div>
+    </div>
+
     <header>
       <div class="container">
         <img class="u-pull-left feather" src="img/feather100x100.png" width="40px" height="40px"/>
-        <h3 class="u-pull-left">Messagerie Dubois</h3>
+        <h3 class="u-pull-left">Dubois Messagerie</h3>
         <div id="disconnect" class="u-pull-right"></div>
       </div>
     </header>
