@@ -11,7 +11,7 @@ var express = require('express'),
 app.use(express.static('public'));
 
 io.on('connection', function (socket) {
-  ///// all users for <form-login>
+  ///// all users & password for <form-login>
   client.hgetall('code', (err, result) => {
     socket.emit('users', result);
   });
@@ -33,6 +33,5 @@ io.on('connection', function (socket) {
     socket.broadcast.emit('message', {pseudo: data.pseudo, message: message, date: date});
     client.rpush('messages', data.pseudo + '~$@~' + message + '~$@~' + date);
     client.ltrim('messages', 0, 399);
-
   });
 });

@@ -1,4 +1,6 @@
-var socket = io.connect('http://'+ window.location.hostname +':8080/');
+var socket = io.connect('http://'+ window.location.hostname +':8080/'),
+    pseudo,
+    code;
 
 function insereFormatMessage(thisPseudo, message, dateMessage) {
   var forMeOrNot = message.indexOf('@'+ pseudo);
@@ -19,6 +21,9 @@ function insereFormatMessage(thisPseudo, message, dateMessage) {
   body.scrollTop = body.scrollHeight;
 }
 
+/*____________________________________________*/
+
+
 socket.on('users', function(data) {
   var pseudos = Object.keys(data);
   pseudos.sort();
@@ -26,20 +31,20 @@ socket.on('users', function(data) {
     $('#pseudo').append('<option value="'+ pseudos[i] +'">'+ pseudos[i] +'</option>');
   }
   $('#formulaire_login').submit(function () {
-    var pseudo = $('#pseudo').val(),
-        code = $('#personal_code').val(),
-        password = $('#password').val();
-
+    pseudo = $('#pseudo').val();
+    code = $('#personal_code').val();
     if (code == data[pseudo]) {
       $('#disconnect').html( '<span>' + pseudo + ' ' +'</span><img src="img/cross.png" height="14px" width="14px"/>' );
       $('#login').css('marginTop', '70px');
       $('#cover-login').fadeOut(300);
+    } else if(code != data[pseudo]){
+      $('#pseudo').css('border-color', 'rgba(255,0,0,0.6)');
+      $('#personal_code').css('border-color', 'rgba(255,0,0,0.6)');
     }
     $('.connect_element').val('').focus();
     return false;
   });
 });
-
 
 socket.on('sendAllMessages', function(data) {
   insereFormatMessage(data.pseudo, data.message, data.date);
