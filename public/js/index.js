@@ -1,10 +1,4 @@
-
 var socket = io.connect('http://'+ window.location.hostname +':8080/');
-pseudo = prompt('pseudo');
-
-$('#disconnect').html( '<span>' + pseudo + ' ' +'</span><img src="img/cross.png" height="14px" width="14px"/>' );
-$('#disconnect').on('click', function() { location.reload(); });
-
 
 function insereFormatMessage(thisPseudo, message, dateMessage) {
   var forMeOrNot = message.indexOf('@'+ pseudo);
@@ -25,6 +19,27 @@ function insereFormatMessage(thisPseudo, message, dateMessage) {
   body.scrollTop = body.scrollHeight;
 }
 
+socket.on('users', function(data) {
+  var pseudos = Object.keys(data);
+  pseudos.sort();
+  for(var i = 0; i < pseudos.length; i++) {
+    $('#pseudo').append('<option value="'+ pseudos[i] +'">'+ pseudos[i] +'</option>');
+  }
+  $('#formulaire_login').submit(function () {
+    var pseudo = $('#pseudo').val(),
+        code = $('#personal_code').val(),
+        password = $('#password').val();
+
+    if (code == data[pseudo]) {
+      $('#disconnect').html( '<span>' + pseudo + ' ' +'</span><img src="img/cross.png" height="14px" width="14px"/>' );
+      $('#login').css('marginTop', '70px');
+      $('#cover-login').fadeOut(300);
+    }
+    $('.connect_element').val('').focus();
+    return false;
+  });
+});
+
 
 socket.on('sendAllMessages', function(data) {
   insereFormatMessage(data.pseudo, data.message, data.date);
@@ -33,10 +48,9 @@ socket.on('message', function(data) {
   insereFormatMessage(data.pseudo, data.message, data.date);
 });
 
-
 $('#formulaire_chat').submit(function () {
   var message = $('#message').val();
-  if(message) {
+  if(message && pseudo != undefined) {
     socket.emit('message', {message: message, pseudo: pseudo});
     $('#message').val('').focus();
     return false;
@@ -45,8 +59,4 @@ $('#formulaire_chat').submit(function () {
   return false;
 });
 
-
-$('#formulaire_login').submit(function () {
-  var pseudo = $('#message').val();
-
-});
+$('#disconnect').on('click', function() { location.reload(); });

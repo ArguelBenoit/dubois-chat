@@ -11,8 +11,12 @@ var express = require('express'),
 app.use(express.static('public'));
 
 io.on('connection', function (socket) {
+  ///// all users for <form-login>
+  client.hgetall('code', (err, result) => {
+    socket.emit('users', result);
+  });
   ///// old messages
-  client.lrange('dubois', 0, -1, (err, result) => {
+  client.lrange('messages', 0, -1, (err, result) => {
     result.forEach((element) => {
       var elementSplited = element.split('~$@~'),
           pseudo = elementSplited[0],
@@ -27,8 +31,8 @@ io.on('connection', function (socket) {
     var date = moment().format(' DD/MM  HH:mm');
     socket.emit('message', {pseudo: data.pseudo, message: message, date: date});
     socket.broadcast.emit('message', {pseudo: data.pseudo, message: message, date: date});
-    client.rpush('dubois', data.pseudo + '~$@~' + message + '~$@~' + date);
-    client.ltrim('dubois', 0, 399);
+    client.rpush('messages', data.pseudo + '~$@~' + message + '~$@~' + date);
+    client.ltrim('messages', 0, 399);
 
   });
 });

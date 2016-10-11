@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
-    <title>Dubois Messagerie</title>
+    <title>Messagerie Dubois</title>
     <script src="/socket.io/socket.io.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.css" rel="stylesheet" type="text/css">
@@ -16,10 +16,14 @@
 
     <div id="cover-login">
       <div id="login">
-        <h4>Dubois Messagerie</h4>
+        <img class="u-pull-left feather" src="img/feather100x100.png" width="35px" height="35px"/>
+        <h4 class="u-pull-left">Messagerie Dubois</h4>
         <form action="/" method="post" id="formulaire_login">
-          <input class="u-full-width" placeholder="Prénom"></input>
-          <input class="u-full-width" placeholder="Code personel"></input>
+          <select class="u-full-width" id="pseudo">
+            <option value="Prénom">Prénom</option>
+          </select>
+          <input class="u-full-width connect_element" id="personal_code" placeholder="Code salari"></input>
+          <input class="u-full-width connect_element" id="password" type="password" placeholder="Mot de passe"></input>
           <input class="button-primary u-full-width" type="submit" id="connect" value="Connexion" />
         </form>
       </div>
@@ -28,7 +32,7 @@
     <header>
       <div class="container">
         <img class="u-pull-left feather" src="img/feather100x100.png" width="40px" height="40px"/>
-        <h3 class="u-pull-left">Dubois Messagerie</h3>
+        <h3 class="u-pull-left">Messagerie Dubois</h3>
         <div id="disconnect" class="u-pull-right"></div>
       </div>
     </header>
@@ -42,9 +46,7 @@
     <div id="form">
       <div class="container">
         <form action="/" method="post" id="formulaire_chat">
-          <div class="twelve columns">
-            <textarea class="u-full-width" id="message" placeholder="Votre message..."></textarea>
-          </div>
+          <textarea class="u-full-width" id="message" placeholder="Votre message..."></textarea>
           <input class="button-primary u-pull-left" type="submit" id="envoi_message" value="Envoyer" />
         </form>
       </div>
