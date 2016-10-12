@@ -1,52 +1,21 @@
-var express = require('express'),
-    socketio = require('socket.io'),
-    app = express(),
-    redis = require('redis'),
-    server = app.listen(8080),
-    ent = require('ent'),
-    moment = require('moment'),
-    io = socketio.listen(server),
-    client = redis.createClient(),
-    http = require('http'),
-    fs = require('fs');
-
+var express = require('express');
+var socketio = require('socket.io');
+var app = express();
+var redis = require('redis');
+var server = app.listen(8080);
+var ent = require('ent');
+var moment = require('moment');
+var io = socketio.listen(server);
+var client = redis.createClient();
+var http = require('http');
 app.use(express.static('public'));
 
-/*___________________________________*/
 
-
-http.createServer(function(request, response){
-    var path = url.parse(request.url).pathname;
-    if(path=="/getstring"){
-        console.log("request recieved");
-        var string = choices[Math.floor(Math.random()*choices.length)];
-        console.log("string '" + string + "' chosen");
-        response.writeHead(200, {"Content-Type": "text/plain"});
-        response.end(string);
-        console.log("string sent");
-    }else{
-        fs.readFile('./index.html', function(err, file) {
-            if(err) {
-                // write an error response or nothing here
-                return;
-            }
-            response.writeHead(200, { 'Content-Type': 'text/html' });
-            response.end(file, "utf-8");
-        });
-    }
-}).listen(8001);
-console.log("server initialized");
-
-
-/*___________________________________*/
-
-io.on('connection', function (socket) {
-  ///// all users & password for <form-login>
+io.on('connection', function (socket) { ///// all users
   client.hgetall('code', (err, result) => {
     socket.emit('users', result);
   });
-  ///// old messages
-  client.lrange('messages', 0, -1, (err, result) => {
+  client.lrange('messages', 0, -1, (err, result) => { ///// old messages
     result.forEach((element) => {
       var elementSplited = element.split('~$@~'),
           pseudo = elementSplited[0],
@@ -55,8 +24,7 @@ io.on('connection', function (socket) {
       socket.emit('sendAllMessages', {pseudo: pseudo, message: message, date: date});
     });
   });
-  ///// new messages
-  socket.on('message', (data) => {
+  socket.on('message', (data) => { ///// new messages
     var message = ent.encode(data.message);
     var date = moment().format(' DD/MM  HH:mm');
     socket.emit('message', {pseudo: data.pseudo, message: message, date: date});
@@ -65,3 +33,21 @@ io.on('connection', function (socket) {
     client.ltrim('messages', 0, 399);
   });
 });
+
+
+http.createServer(function (req, res) {
+  console.log('request received');
+  res.writeHead(200, {'Content-Type': 'json'});
+  res.end('tralala');
+}).listen(9000);
+
+
+
+
+
+
+
+
+
+
+//
