@@ -175,7 +175,19 @@ header h3 {
   bottom: 0px;
   min-width: 650px;
 }
+#form p.txt-form {
+  font-size: 12px;
+  margin-left: 15px;
+  margin-bottom: 0;
+  color: #454545;
+  opacity: 0.6;
+  white-space:nowrap;
+  transition-duration: 300ms;
+}
+#form p.txt-form:hover { opacity: 1; }
+#form p.txt-form b { color: #111; }
 @media only screen and (max-device-width: 480px) {
-  #form input { width: 100%; }
+  #form p.txt-form { display: none; }
+  #form .row input { width: 100%; }
   #form { min-width: 0px; }
 }
