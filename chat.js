@@ -6,9 +6,39 @@ var express = require('express'),
     ent = require('ent'),
     moment = require('moment'),
     io = socketio.listen(server),
-    client = redis.createClient();
+    client = redis.createClient(),
+    http = require('http'),
+    fs = require('fs');
 
 app.use(express.static('public'));
+
+/*___________________________________*/
+
+
+http.createServer(function(request, response){
+    var path = url.parse(request.url).pathname;
+    if(path=="/getstring"){
+        console.log("request recieved");
+        var string = choices[Math.floor(Math.random()*choices.length)];
+        console.log("string '" + string + "' chosen");
+        response.writeHead(200, {"Content-Type": "text/plain"});
+        response.end(string);
+        console.log("string sent");
+    }else{
+        fs.readFile('./index.html', function(err, file) {
+            if(err) {
+                // write an error response or nothing here
+                return;
+            }
+            response.writeHead(200, { 'Content-Type': 'text/html' });
+            response.end(file, "utf-8");
+        });
+    }
+}).listen(8001);
+console.log("server initialized");
+
+
+/*___________________________________*/
 
 io.on('connection', function (socket) {
   ///// all users & password for <form-login>

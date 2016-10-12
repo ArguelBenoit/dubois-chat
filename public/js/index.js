@@ -1,3 +1,4 @@
+
 var socket = io.connect('http://'+ window.location.hostname +':8080/'),
     pseudo,
     code;
@@ -21,8 +22,31 @@ function insereFormatMessage(thisPseudo, message, dateMessage) {
   body.scrollTop = body.scrollHeight;
 }
 
+function getXMLHttpRequest() {
+  var xhr = null;
+  if (window.XMLHttpRequest || window.ActiveXObject) {
+    if (window.ActiveXObject) {
+      try {
+        xhr = new ActiveXObject("Msxml2.XMLHTTP");
+      } catch(e) {
+        xhr = new ActiveXObject("Microsoft.XMLHTTP");
+      }
+    } else {
+      xhr = new XMLHttpRequest();
+    }
+  } else {
+    alert("Votre navigateur ne supporte pas l'objet XMLHTTPRequest.");
+    return null;
+  }
+  return xhr;
+}
+var xhr = getXMLHttpRequest();
+
 /*____________________________________________*/
 
+
+xhr.open('GET', '.object', true);
+xhr.send(null);
 
 socket.on('users', function(data) {
   var pseudos = Object.keys(data);
@@ -37,6 +61,7 @@ socket.on('users', function(data) {
       $('#disconnect').html( '<span>' + pseudo + ' ' +'</span><img src="img/cross.png" height="14px" width="14px"/>' );
       $('#login').css('marginTop', '70px');
       $('#cover-login').fadeOut(300);
+
     } else if(code != data[pseudo]){
       $('#pseudo').css('border-color', 'rgba(255,0,0,0.6)');
       $('#personal_code').css('border-color', 'rgba(255,0,0,0.6)');
@@ -46,12 +71,15 @@ socket.on('users', function(data) {
   });
 });
 
+
 socket.on('sendAllMessages', function(data) {
   insereFormatMessage(data.pseudo, data.message, data.date);
 });
+
 socket.on('message', function(data) {
   insereFormatMessage(data.pseudo, data.message, data.date);
 });
+
 
 $('#formulaire_chat').submit(function () {
   var message = $('#message').val();
@@ -63,5 +91,6 @@ $('#formulaire_chat').submit(function () {
   $('#message').val('').focus();
   return false;
 });
+
 
 $('#disconnect').on('click', function() { location.reload(); });
