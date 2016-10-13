@@ -7,7 +7,6 @@ var ent = require('ent');
 var moment = require('moment');
 var io = socketio.listen(server);
 var client = redis.createClient();
-var http = require('http');
 app.use(express.static('public'));
 
 
@@ -33,21 +32,3 @@ io.on('connection', function (socket) { ///// all users
     client.ltrim('messages', 0, 399);
   });
 });
-
-
-http.createServer(function (req, res) {
-  console.log('request received');
-  res.writeHead(200, {'Content-Type': 'json'});
-  res.end('tralala');
-}).listen(9000);
-
-
-
-
-
-
-
-
-
-
-//
