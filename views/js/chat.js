@@ -1,7 +1,7 @@
 
 $(document).ready(function(){
 
-  var socket = io.connect('http://'+ window.location.hostname +':8080/');
+  var socket = io.connect('http://'+ window.location.hostname +'/');
   var pseudoCourant;
 
   function insereFormatMessage(thisPseudo, message, dateMessage, pseudo, appendOrPrepend) {
@@ -34,11 +34,11 @@ $(document).ready(function(){
     document.getElementById('body').scrollTop = document.getElementById('body').scrollHeight;
   }
 
-  $.post("http://localhost:8080/sess", false, function(a) {
+  $.post("http://localhost/sess", false, function(a) {
     $('#disconnect').html( '<span>' + a + ' ' +'</span><img src="img/cross.png" height="14px" width="14px"/>' );
-    $('#disconnect').on('click', function(){window.location.replace('http://'+ window.location.hostname +':8080/logout');});
+    $('#disconnect').on('click', function(){window.location.replace('http://'+ window.location.hostname +'/logout');});
     pseudoCourant = a;
-    $.post("http://localhost:8080/mess", false, function(a) {
+    $.post("http://localhost/mess", false, function(a) {
       var allMessages = JSON.parse(a);
       allMessages.forEach((element) => {
         var elementSplited = element.split('~$@~'),
