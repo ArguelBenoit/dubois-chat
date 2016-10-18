@@ -70,7 +70,7 @@ io.on('connection', function (socket) {
     var date = moment().format(' DD/MM  HH:mm');
     socket.emit('message', {pseudo: data.pseudo, message: message, date: date});
     socket.broadcast.emit('message', {pseudo: data.pseudo, message: message, date: date});
-    client.rpush('messages', data.pseudo + '~$@~' + message + '~$@~' + date);
-    client.ltrim('messages', 0, 399);
+    client.lpush('messages', data.pseudo + '~$@~' + message + '~$@~' + date);
+    client.ltrim('messages', 0, 300);
   });
 });
