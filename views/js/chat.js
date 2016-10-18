@@ -16,7 +16,6 @@ function insereFormatMessage(thisPseudo, message, dateMessage, pseudo) {
     $('#zone_chat').append('<p class="p-other-users"><strong class="other">' + thisPseudo + ' ' + '<i class="fa fa-comment-o" aria-hidden="true"></i></strong></br>' + message + '<span class="date"> ' + dateMessage + '</span></p>');
   }
   document.getElementById('body').scrollTop = document.getElementById('body').scrollHeight;
-  window.body.scrollTop = window.body.scrollHeight;
 }
 
 /*___________________________________________________*/
