@@ -21,25 +21,33 @@ function insereFormatMessage(thisPseudo, message, dateMessage, pseudo) {
 /*___________________________________________________*/
 
 $(document).ready(function(){
-  $.post("http://localhost:3000/sess", false, function(pseudo) {
-    $('#disconnect').html( '<span>' + pseudo + ' ' +'</span><img src="img/cross.png" height="14px" width="14px"/>' );
+  var pseudoCourant;
+  $.post("http://localhost:3000/sess", false, function(a) {
+    $('#disconnect').html( '<span>' + a + ' ' +'</span><img src="img/cross.png" height="14px" width="14px"/>' );
     $('#disconnect').on('click', function(){window.location.replace('http://'+ window.location.hostname +':3000/logout');});
-
-    socket.on('sendAllMessages', function(data) { /// all messages
-      insereFormatMessage(data.pseudo, data.message, data.date, pseudo);
+    pseudoCourant = a;
+  });
+  $.post("http://localhost:3000/mess", false, function(a) {
+    var allMessages = JSON.parse(a);
+    allMessages.forEach((element) => {
+      var elementSplited = element.split('~$@~'),
+          pseudo = elementSplited[0],
+          message = elementSplited[1],
+          date = elementSplited[2];
+      insereFormatMessage(pseudo, message, date, pseudoCourant);
     });
-    socket.on('message', function(data) { /// received one message
-      insereFormatMessage(data.pseudo, data.message, data.date, pseudo);
-    });
-    $('#formulaire_chat').submit(function () { /// send one message
-      var message = $('#message').val();
-      if(message && pseudo != undefined) {
-        socket.emit('message', {message: message, pseudo: pseudo});
-        $('#message').val('').focus();
-        return false;
-      }
+  });
+  socket.on('message', function(data) { /// received one message
+    insereFormatMessage(data.pseudo, data.message, data.date, pseudoCourant);
+  });
+  $('#formulaire_chat').submit(function () { /// send one message
+    var message = $('#message').val();
+    if(message && pseudoCourant != undefined) {
+      socket.emit('message', {message: message, pseudo: pseudoCourant});
       $('#message').val('').focus();
       return false;
-    });
+    }
+    $('#message').val('').focus();
+    return false;
   });
 });

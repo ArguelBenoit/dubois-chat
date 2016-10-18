@@ -109,7 +109,7 @@ header h3 {
   font-size: 16px;
 }
 #zone_chat p strong.my { color: #1EAEDB; }
-#zone_chat p strong.other { color: rgba(0, 155, 0, 0.8);}
+#zone_chat p strong.other { color: rgba(255, 0, 0, 0.5)}
 #zone_chat p strong.important { color: rgba(255, 0, 0, 0.5);}
 #zone_chat p {
   border: solid 1px #efefef;
@@ -127,11 +127,11 @@ header h3 {
    font-size: 13px;
 }
 #zone_chat p.p-other-users {
-  border-right: 1px solid rgb(125, 125, 125);
+  border-right: 2px solid rgba(255, 0, 0, 0.5);
   animation-name: pop-animation-other-users;
 }
 @keyframes pop-animation-other-users {
-  from { border-right: 12px solid rgba(0, 155, 0, 1); opacity: 0; };
+  from { border-right: 12px solid rgba(255, 0, 0, 0.5); opacity: 0; };
   to { border-right: 4px solid rgba(0, 155, 0, 1);  opacity: 1; };
 }
 #zone_chat p.p-my-user {

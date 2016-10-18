@@ -40,6 +40,12 @@ app.post('/sess',function(req,res){
 	sess = req.session;
 	res.end(sess.user);
 });
+app.post('/mess',function(req,res){
+	client.lrange('messages', 0, -1, (err, result) => {
+		var allMessage = JSON.stringify(result);
+		res.end(allMessage);
+  });
+});
 app.get('/chat',function(req,res){
 	sess = req.session;
 	if (sess.user) {
@@ -58,20 +64,8 @@ app.get('/logout',function(req,res){
 	});
 });
 
-io.on('connection', function (socket) { ///// all users
-  client.hgetall('code', (err, result) => {
-    socket.emit('users', result);
-  });
-  client.lrange('messages', 0, -1, (err, result) => { ///// old messages
-    result.forEach((element) => {
-      var elementSplited = element.split('~$@~'),
-          pseudo = elementSplited[0],
-          message = elementSplited[1],
-          date = elementSplited[2];
-      socket.emit('sendAllMessages', {pseudo: pseudo, message: message, date: date});
-    });
-  });
-  socket.on('message', (data) => { ///// new messages
+io.on('connection', function (socket) {
+  socket.on('message', (data) => {
     var message = ent.encode(data.message);
     var date = moment().format(' DD/MM  HH:mm');
     socket.emit('message', {pseudo: data.pseudo, message: message, date: date});
