@@ -36,7 +36,7 @@ $(document).ready(function(){
 
   $.post("http://localhost:8080/sess", false, function(a) {
     $('#disconnect').html( '<span>' + a + ' ' +'</span><img src="img/cross.png" height="14px" width="14px"/>' );
-    $('#disconnect').on('click', function(){window.location.replace('http://'+ window.location.hostname +'/logout');});
+    $('#disconnect').on('click', function(){window.location.replace('http://'+ window.location.hostname +':8080/logout');});
     pseudoCourant = a;
     $.post("http://localhost:8080/mess", false, function(a) {
       var allMessages = JSON.parse(a);
