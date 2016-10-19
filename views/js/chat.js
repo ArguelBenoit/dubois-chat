@@ -33,11 +33,11 @@ $(document).ready(function(){
     document.getElementById('body').scrollTop = document.getElementById('body').scrollHeight;
   }
 
-  $.post("http://'+ window.location.hostname +':3000/sess", false, function(a) {
+  $.post('http://'+ window.location.hostname +':3000/sess', false, function(a) {
     $('#disconnect').html( '<span>' + a + ' ' +'</span><img src="img/cross.png" height="14px" width="14px"/>' );
     $('#disconnect').on('click', function(){window.location.replace('http://'+ window.location.hostname +':3000/logout');});
     pseudoCourant = a;
-    $.post("http://'+ window.location.hostname +':3000/mess", false, function(a) {
+    $.post('http://'+ window.location.hostname +':3000/mess', false, function(a) {
       var allMessages = JSON.parse(a);
       allMessages.forEach((element) => {
         var elementSplited = element.split('~$@~'),
