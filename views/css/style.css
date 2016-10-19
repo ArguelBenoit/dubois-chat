@@ -20,7 +20,7 @@ html, body {
   margin: auto;
   margin-top: 100px;
   max-width: 300px;
-  border-radius: 2px;
+  border-radius: 1px;
 }
 #login h4 { margin-left: 8px; }
 #login form { margin: 0 0; }
@@ -112,13 +112,11 @@ header h3 {
 #zone_chat p strong.other { color: rgba(255, 0, 0, 0.5)}
 #zone_chat p strong.important { color: rgba(255, 0, 0, 0.5);}
 #zone_chat p {
-  border: solid 1px #efefef;
-  border-bottom: solid 1px #d6d6d6;
   padding: 14px;
   background: white;
   margin-bottom: 12px;
-  border-radius: 3px;
   animation-duration: 1000ms;
+  box-shadow: 0px 1px 1px #8c8c8c;
 }
 #zone_chat p .date {
    opacity:0.5;

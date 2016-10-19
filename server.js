@@ -10,13 +10,21 @@ var moment = require('moment');
 var redis = require('redis');
 var client = redis.createClient();
 
+app.use(function(req, res, next) {
+	res.header('Access-Control-Allow-Origin', '*');
+	res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+	res.header('Access-Control-Allow-Headers', 'Content-Type');
+	next();
+});
+
 app.set('views', __dirname + '/views');
 app.engine('html', require('ejs').renderFile);
 
-app.use(session({secret: 'ssshhhhh', saveUninitialized: true, resave: true}));
+app.use(session({secret: ' ', saveUninitialized: true, resave: true}));
 app.use(express.static('views'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
+
 
 var sess;
 app.post('/users',function(req,res){
@@ -63,6 +71,7 @@ app.get('/logout',function(req,res){
 		}
 	});
 });
+
 
 io.on('connection', function (socket) {
   socket.on('message', (data) => {
