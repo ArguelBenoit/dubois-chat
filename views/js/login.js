@@ -13,7 +13,7 @@ $(document).ready(function(){
 	$("#submit").click(function(){
 		user=$('#user').val();
 		code=$('#code').val();
-		$.post('http://localhost:3000/chat', { user: user, code: code}, function(data) {
+		$.post('http://'+ window.location.hostname +':3000/chat', { user: user, code: code}, function(data) {
 			if(data === 'done') {
 				window.location.href='http://'+ window.location.hostname +':3000/chat';
 			} else if (data === 'false') {
