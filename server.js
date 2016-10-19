@@ -27,7 +27,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 
 
 var sess;
-app.post('/users',function(req,res){
+app.get('/users',function(req,res){
 	client.hgetall('code', (err, result) => {
 		res.end(JSON.stringify(result));
 	});
