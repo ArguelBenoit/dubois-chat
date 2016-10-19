@@ -18,7 +18,7 @@ $(document).ready(function(){
 				if (window.location.hostname == 'localhost') {
 					window.location.href = 'http://localhost:3000/chat.html';
 				} else {
-					window.location.href = 'http://'+ window.location.hostname +'/chat.html';
+					window.location.href = 'http://'+ window.location.hostname +':3000/chat.html';
 				}
 			} else if (data === 'false') {
 				$('#code').css('border-color', 'rgba(255,0,0,0.6)');
