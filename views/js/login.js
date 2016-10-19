@@ -15,7 +15,7 @@ $(document).ready(function(){
 		code=$('#code').val();
 		$.post('http://localhost:3000/chat', { user: user, code: code}, function(data) {
 			if(data === 'done') {
-				window.location.href='/chat';
+				window.location.href='/chat.html';
 			} else if (data === 'false') {
 				$('#code').css('border-color', 'rgba(255,0,0,0.6)');
 			}
