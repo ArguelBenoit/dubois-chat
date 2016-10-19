@@ -13,9 +13,9 @@ $(document).ready(function(){
 	$("#submit").click(function(){
 		user=$('#user').val();
 		code=$('#code').val();
-		$.post('/chat', { user: user, code: code}, function(data) {
+		$.post('http://'+ window.location.hostname +':3000/chat', { user: user, code: code}, function(data) {
 			if(data === 'done') {
-				window.location.href='http://'+ window.location.hostname +':3000/chat';
+				window.location.href = '/chat';
 			} else if (data === 'false') {
 				$('#code').css('border-color', 'rgba(255,0,0,0.6)');
 			}
