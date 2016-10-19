@@ -13,7 +13,7 @@ $(document).ready(function(){
       if (forMeOrNot >= 0) {
         $('#zone_chat').append('<p class="message-for-me"><strong class="important">' + thisPseudo + ' (Pour vous) <i class="fa fa-comment-o" aria-hidden="true"></i></strong></br>' + message + '<span class="date"> ' + dateMessage + '</span></p>');
       } else if(important >= 0) {
-        $('#zone_chat').append('<p class="important"><strong class="important">' + thisPseudo + ' <i class="fa fa-exclamation-triangle" aria-hidden="true"></i></strong></br>' + message + '<span class="date"> ' + dateMessage + '</span></p>');
+        $('#zone_chat').append('<p fclass="important"><strong class="important">' + thisPseudo + ' <i class="fa fa-exclamation-triangle" aria-hidden="true"></i></strong></br>' + message + '<span class="date"> ' + dateMessage + '</span></p>');
       } else if (thisPseudo == pseudo) {
         $('#zone_chat').append('<p class="p-my-user"><strong class="my">' + thisPseudo + ' (Moi-même) <i class="fa fa-comment-o" aria-hidden="true"></i></strong></br>' + message + '<span class="date"> ' + dateMessage + '</span></p>');
       } else {
@@ -33,9 +33,11 @@ $(document).ready(function(){
     document.getElementById('body').scrollTop = document.getElementById('body').scrollHeight;
   }
 
-  $.post('http://'+ window.location.hostname +':3000/sess', false, function(a) {
+  $.get('http://'+ window.location.hostname +':3000/sess', false, function(a) {
     $('#disconnect').html( '<span>' + a + ' ' +'</span><img src="img/cross.png" height="14px" width="14px"/>' );
-    $('#disconnect').on('click', function(){window.location.replace('http://'+ window.location.hostname +':3000/logout');});
+    $('#disconnect').on('click', function(){
+      window.location.replace('http://'+ window.location.hostname +':3000/logout');
+    });
     pseudoCourant = a;
     $.post('http://'+ window.location.hostname +':3000/mess', false, function(a) {
       var allMessages = JSON.parse(a);

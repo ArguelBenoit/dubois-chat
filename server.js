@@ -44,7 +44,7 @@ app.post('/chat',function(req,res){
 		}
 	});
 });
-app.post('/sess',function(req,res){
+app.get('/sess',function(req,res){
 	sess = req.session;
 	res.end(sess.user);
 });
@@ -67,7 +67,7 @@ app.get('/logout',function(req,res){
 		if(err){
 			console.log(err);
 		} else {
-			res.redirect('/');
+			res.redirect('/index.html');
 		}
 	});
 });
