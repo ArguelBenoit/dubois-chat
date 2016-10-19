@@ -2,7 +2,7 @@
 $(document).ready(function(){
 	var user;
 	var code;
-	$.get('http://'+ window.location.hostname +':3000/users', false, function(data) {
+	$.post('http://'+ window.location.hostname +':3000/users', false, function(data) {
 		var userAndCode = JSON.parse(data);
 		var users = Object.keys(userAndCode);
 		users.sort();

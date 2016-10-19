@@ -27,7 +27,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 
 
 var sess;
-app.get('/users',function(req,res){
+app.post('/users',function(req,res){
 	client.hgetall('code', (err, result) => {
 		res.end(JSON.stringify(result));
 	});
@@ -44,7 +44,7 @@ app.post('/chat',function(req,res){
 		}
 	});
 });
-app.get('/sess',function(req,res){
+app.post('/sess',function(req,res){
 	sess = req.session;
 	res.end(sess.user);
 });
