@@ -59,6 +59,7 @@ $(document).ready(function(){
   /*_____________________________________________________________________*/
 
   $.post('http://'+ window.location.hostname +':3000/sess', false, function(a) {
+    if (!a) { window.location.replace('http://'+ window.location.hostname +':3000/'); }
     $('#disconnect').html( '<span>' + a + ' ' +'</span><img src="img/cross.png" height="14px" width="14px"/>' );
     $('#disconnect').on('click', function(){
       window.location.replace('http://'+ window.location.hostname +':3000/logout');

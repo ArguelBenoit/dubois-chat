@@ -59,15 +59,7 @@ app.get('/chat',function(req,res){
 	if (sess.user) {
 		res.render('chat.html');
 	}	else {
-		res.render('index.html');
-	}
-});
-app.get('/chat.html',function(req,res){
-	sess = req.session;
-	if (sess.user) {
-		res.render('chat.html');
-	}	else {
-		res.render('index.html');
+		res.redirect('/');
 	}
 });
 app.get('/logout',function(req,res){
@@ -75,7 +67,7 @@ app.get('/logout',function(req,res){
 		if(err){
 			console.log(err);
 		} else {
-			res.redirect('/index.html');
+			res.redirect('/');
 		}
 	});
 });
