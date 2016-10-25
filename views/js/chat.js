@@ -1,3 +1,4 @@
+
 $(document).ready(function(){
   var socket = io.connect('http://'+ window.location.hostname +':3000/');
   var pseudoCourant;
@@ -59,7 +60,11 @@ $(document).ready(function(){
   /*_____________________________________________________________________*/
 
   $.post('http://'+ window.location.hostname +':3000/sess', false, function(a) {
-    if (!a) { window.location.replace('http://'+ window.location.hostname +':3000/'); }
+    if (!a) {
+      window.location.replace('http://'+ window.location.hostname +':3000/');
+    } else {
+      $("#cover").fadeOut("1000");
+    }
     $('#disconnect').html( '<span>' + a + ' ' +'</span><img src="img/cross.png" height="14px" width="14px"/>' );
     $('#disconnect').on('click', function(){
       window.location.replace('http://'+ window.location.hostname +':3000/logout');
