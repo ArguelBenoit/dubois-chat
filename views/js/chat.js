@@ -1,7 +1,7 @@
 $(document).ready(function(){
-
   var socket = io.connect('http://'+ window.location.hostname +':3000/');
   var pseudoCourant;
+
 
   function notify(pseudo) {
     if (Notification.permission === 'granted') {
@@ -16,7 +16,10 @@ $(document).ready(function(){
       });
     }
   }
-
+  function goToBottom(){
+    $('html,body').animate({scrollTop: $('body').height() }, 300);
+    return false;
+  };
   function insereFormatMessage(thisPseudo, message, dateMessage, pseudo, appendOrPrepend) {
     var forMeOrNot = message.indexOf('@'+ pseudo);
     var important = message.indexOf('@important');
@@ -44,8 +47,11 @@ $(document).ready(function(){
         $('#zone_chat').prepend('<p class="p-other-users"><strong class="other">' + thisPseudo + ' ' + '<i class="fa fa-comment-o" aria-hidden="true"></i></strong></br>' + message + '<span class="date"> ' + dateMessage + '</span></p>');
       }
     }
-    document.getElementById('body').scrollTop = document.getElementById('body').scrollHeight;
   }
+
+
+  /*_____________________________________________________________________*/
+
 
   $.post('http://'+ window.location.hostname +':3000/sess', false, function(a) {
     $('#disconnect').html( '<span>' + a + ' ' +'</span><img src="img/cross.png" height="14px" width="14px"/>' );
@@ -62,16 +68,16 @@ $(document).ready(function(){
         date = elementSplited[2];
         insereFormatMessage(pseudo, message, date, pseudoCourant, 'prepend');
       });
+      goToBottom();
     });
   });
-
   socket.on('message', function(data) { /// received one message
     insereFormatMessage(data.pseudo, data.message, data.date, pseudoCourant, 'append');
     if (data.pseudo != pseudoCourant && document.visibilityState != 'visible' || document.visibilityState == 'unloaded' || document.visibilityState == 'prerender' || document.visibilityState == 'hidden') {
       notify(data.pseudo);
     };
+    goToBottom();
   });
-
   $('#formulaire_chat').submit(function () { /// send one message
     var message = $('#message').val();
     if(message && pseudoCourant != undefined) {
@@ -82,5 +88,4 @@ $(document).ready(function(){
     $('#message').val('').focus();
     return false;
   });
-
 });

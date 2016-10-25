@@ -102,7 +102,6 @@ header h3 {
 #zone_chat {
   padding: 75px 0 155px 0;
   max-height: 100%;
-  overflow: auto;
 }
 #zone_chat p:last-child { margin-bottom: 0px; }
 #zone_chat p strong {
