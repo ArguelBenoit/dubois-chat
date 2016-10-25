@@ -1,17 +1,25 @@
 $(document).ready(function(){
   var socket = io.connect('http://'+ window.location.hostname +':3000/');
   var pseudoCourant;
+  /*_____________________________________________________________________*/
 
-
-  function notify(pseudo) {
+  function spawnNotification(theBody, theIcon, theTitle) {
+    var options = {
+      body: theBody,
+      icon: theIcon
+    };
+    var n = new Notification(theTitle, options);
+    setTimeout(n.close.bind(n), 60000);
+  }
+  function notify(pseudo, message) {
     if (Notification.permission === 'granted') {
-      var notification = new Notification(pseudo + ' a écrit un méssage.');
+      spawnNotification(message, '../img/feather100x100.png', pseudo + ' a écrit : ');
     } else if (Notification.permission !== 'denied') {
       Notification.requestPermission(function (permission) {
         if(!('permission' in Notification)) {
           Notification.permission = permission;
         } if (permission === 'granted') {
-          var notification = new Notification(pseudo + ' a écrit un méssage.');
+          spawnNotification(escape(message), '../img/feather80x80.png', pseudo + ' a écrit : ');
         }
       });
     }
@@ -48,10 +56,7 @@ $(document).ready(function(){
       }
     }
   }
-
-
   /*_____________________________________________________________________*/
-
 
   $.post('http://'+ window.location.hostname +':3000/sess', false, function(a) {
     $('#disconnect').html( '<span>' + a + ' ' +'</span><img src="img/cross.png" height="14px" width="14px"/>' );
@@ -73,8 +78,8 @@ $(document).ready(function(){
   });
   socket.on('message', function(data) { /// received one message
     insereFormatMessage(data.pseudo, data.message, data.date, pseudoCourant, 'append');
-    if (data.pseudo != pseudoCourant && document.visibilityState != 'visible' || document.visibilityState == 'unloaded' || document.visibilityState == 'prerender' || document.visibilityState == 'hidden') {
-      notify(data.pseudo);
+    if (document.visibilityState != 'visible' || document.visibilityState == 'hidden') {
+      notify(data.pseudo, data.message);
     };
     goToBottom();
   });

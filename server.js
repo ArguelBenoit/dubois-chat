@@ -62,6 +62,14 @@ app.get('/chat',function(req,res){
 		res.render('index.html');
 	}
 });
+app.get('/chat.html',function(req,res){
+	sess = req.session;
+	if (sess.user) {
+		res.render('chat.html');
+	}	else {
+		res.render('index.html');
+	}
+});
 app.get('/logout',function(req,res){
 	req.session.destroy(function(err){
 		if(err){

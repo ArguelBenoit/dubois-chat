@@ -16,9 +16,9 @@ $(document).ready(function(){
 		$.post('http://'+ window.location.hostname +':3000/chat', { user: user, code: code}, function(data) {
 			if(data === 'done') {
 				if (window.location.hostname == 'localhost') {
-					window.location.href = 'http://localhost:3000/chat.html';
+					window.location.href = 'http://localhost:3000/chat';
 				} else {
-					window.location.href = 'http://'+ window.location.hostname +':3000/chat.html';
+					window.location.href = 'http://'+ window.location.hostname +':3000/chat';
 				}
 			} else if (data === 'false') {
 				$('#code').css('border-color', 'rgba(255,0,0,0.6)');
