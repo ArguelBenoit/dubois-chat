@@ -3,6 +3,20 @@ $(document).ready(function(){
   var socket = io.connect('http://'+ window.location.hostname +':3000/');
   var pseudoCourant;
 
+  function notify(pseudo) {
+    if (Notification.permission === 'granted') {
+      var notification = new Notification(pseudo + ' a écrit un méssage.');
+    } else if (Notification.permission !== 'denied') {
+      Notification.requestPermission(function (permission) {
+        if(!('permission' in Notification)) {
+          Notification.permission = permission;
+        } if (permission === 'granted') {
+          var notification = new Notification(pseudo + ' a écrit un méssage.');
+        }
+      });
+    }
+  }
+
   function insereFormatMessage(thisPseudo, message, dateMessage, pseudo, appendOrPrepend) {
     var forMeOrNot = message.indexOf('@'+ pseudo);
     var important = message.indexOf('@important');
@@ -53,6 +67,9 @@ $(document).ready(function(){
 
   socket.on('message', function(data) { /// received one message
     insereFormatMessage(data.pseudo, data.message, data.date, pseudoCourant, 'append');
+    if (data.pseudo != pseudoCourant && document.visibilityState != 'visible' || document.visibilityState == 'unloaded' || document.visibilityState == 'prerender' || document.visibilityState == 'hidden') {
+      notify(data.pseudo);
+    };
   });
 
   $('#formulaire_chat').submit(function () { /// send one message
