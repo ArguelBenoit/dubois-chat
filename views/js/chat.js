@@ -7,9 +7,11 @@ $(document).ready(function(){
   function spawnNotification(theBody, theIcon, theTitle) {
     var options = {
       body: theBody,
-      icon: theIcon
+      icon: theIcon,
+      lang:'fr-FR'
     };
     var n = new Notification(theTitle, options);
+    n.lang;
     n.onclick = function(){
       window.focus();
       this.cancel();
