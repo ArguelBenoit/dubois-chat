@@ -1,7 +1,13 @@
 
 $(document).ready(function(){
-  var socket = io.connect('http://'+ window.location.hostname +'/');
   var pseudoCourant;
+  var location;
+  if (window.location.hostname == 'localhost') {
+    location = 'http://'+ window.location.hostname + ':3000';
+  } else {
+    location = 'http://'+ window.location.hostname; //because in production nginx redirect automaticaly all request on port 3000
+  }
+  var socket = io.connect(location +'/');
   /*_____________________________________________________________________*/
 
   function spawnNotification(theBody, theIcon, theTitle) {
@@ -65,18 +71,18 @@ $(document).ready(function(){
   }
   /*_____________________________________________________________________*/
 
-  $.post('http://'+ window.location.hostname +'/sess', false, function(a) {
+  $.post(location +'/sess', false, function(a) {
     if (!a) {
-      window.location.replace('http://'+ window.location.hostname +'/');
+      window.location.replace(location +'/');
     } else {
       $("#cover").fadeOut("1000");
     }
     $('#disconnect').html( '<span>' + a + ' ' +'</span><img src="img/cross.png" height="14px" width="14px"/>' );
     $('#disconnect').on('click', function(){
-      window.location.replace('http://'+ window.location.hostname +'/logout');
+      window.location.replace(location +'/logout');
     });
     pseudoCourant = a;
-    $.post('http://'+ window.location.hostname +'/mess', false, function(a) {
+    $.post(location + '/mess', false, function(a) {
       var allMessages = JSON.parse(a);
       allMessages.forEach((element) => {
         var elementSplited = element.split('~$@~'),
