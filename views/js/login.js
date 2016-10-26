@@ -2,7 +2,8 @@
 $(document).ready(function(){
 	var user;
 	var code;
-	$.post('http://'+ window.location.hostname +':3000/users', false, function(data) {
+
+	$.post('http://'+ window.location.hostname +'/users', false, function(data) {
 		var userAndCode = JSON.parse(data);
 		var users = Object.keys(userAndCode);
 		users.sort();
@@ -21,9 +22,9 @@ $(document).ready(function(){
 	$('#submit').click(function(){
 		user=$('#user').val();
 		code=$('#code').val();
-		$.post('http://'+ window.location.hostname +':3000/chat', { user: user, code: code}, function(data) {
+		$.post('http://'+ window.location.hostname +'/chat', { user: user, code: code}, function(data) {
 			if(data === 'done') {
-				window.location.href = 'http://'+ window.location.hostname +':3000/chat';
+				window.location.href = 'http://'+ window.location.hostname +'/chat';
 			} else if (data === 'false') {
 				$('#code').css('border', '2px solid rgba(255,0,0,0.6)');
 			}
