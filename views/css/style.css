@@ -164,7 +164,7 @@ header h3 {
 #form textarea { margin-bottom: 5px; }
 #form form { margin-bottom: 0px; }
 #form {
-  background: white;
+  background: #f5f5f5;
   width: 100%;
   padding-top: 12px;
   border-top: solid 1px #d6d6d6;

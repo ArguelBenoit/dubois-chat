@@ -10,6 +10,10 @@ $(document).ready(function(){
       icon: theIcon
     };
     var n = new Notification(theTitle, options);
+    n.onclick = function(){
+      window.focus();
+      this.cancel();
+    };
     setTimeout(n.close.bind(n), 60000);
   }
   function notify(pseudo, message) {
@@ -20,7 +24,7 @@ $(document).ready(function(){
         if(!('permission' in Notification)) {
           Notification.permission = permission;
         } if (permission === 'granted') {
-          spawnNotification(escape(message), '../img/feather80x80.png', pseudo + ' a écrit : ');
+          spawnNotification(message, '../img/feather80x80.png', pseudo + ' a écrit : ');
         }
       });
     }
@@ -82,14 +86,14 @@ $(document).ready(function(){
       goToBottom();
     });
   });
-  socket.on('message', function(data) { /// received one message
+  socket.on('message', function(data) { // received one message
     insereFormatMessage(data.pseudo, data.message, data.date, pseudoCourant, 'append');
-    if (document.visibilityState != 'visible' || document.visibilityState == 'hidden') {
-      notify(data.pseudo, data.message);
-    };
+    if(data.pseudo != pseudoCourant) {
+      notify(data.pseudo, data.message); // why not add condition (document.visibilityState != 'visible' || document.visibilityState == 'hidden')
+    }
     goToBottom();
   });
-  $('#formulaire_chat').submit(function () { /// send one message
+  $('#formulaire_chat').submit(function () { // send one message
     var message = $('#message').val();
     if(message && pseudoCourant != undefined) {
       socket.emit('message', {message: message, pseudo: pseudoCourant});
