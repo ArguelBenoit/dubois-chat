@@ -71,6 +71,22 @@ $(document).ready(function(){
   }
   /*_____________________________________________________________________*/
 
+
+  $('#all-users').click(function() {
+    $('#list-users').css('display', 'initial');
+  });
+  $('#list-users').click(function() {
+    $("#list-users").fadeOut("100");
+  });
+
+  $.post(location +'/users', false, function(data) {
+		var users = Object.keys(JSON.parse(data));
+		users.sort();
+		for(var i = 0; i < users.length; i++) {
+			$('#list-users-ul').append('<li>' + users[i] + '</li>');
+		}
+	});
+
   $.post(location +'/sess', false, function(a) {
     if (!a) {
       window.location.replace(location +'/');
