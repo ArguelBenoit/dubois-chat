@@ -79,14 +79,6 @@ $(document).ready(function(){
     $("#list-users").fadeOut("100");
   });
 
-  $.post(location +'/users', false, function(data) {
-		var users = Object.keys(JSON.parse(data));
-		users.sort();
-		for(var i = 0; i < users.length; i++) {
-			$('#list-users-ul').append('<li>' + users[i] + '</li>');
-		}
-	});
-
   $.post(location +'/sess', false, function(a) {
     if (!a) {
       window.location.replace(location +'/');
@@ -98,6 +90,7 @@ $(document).ready(function(){
       window.location.replace(location +'/logout');
     });
     pseudoCourant = a;
+    socket.emit('userConnect', {pseudo: a});
     $.post(location + '/mess', false, function(a) {
       var allMessages = JSON.parse(a);
       allMessages.forEach((element) => {
@@ -108,6 +101,14 @@ $(document).ready(function(){
         insereFormatMessage(pseudo, message, date, pseudoCourant, 'prepend');
       });
       goToBottom();
+    });
+  });
+
+  socket.on('allConnected', function(data){
+    console.log(data);
+    data.forEach(function(element) {
+      var i;
+      $('#list-users-ul').append('<li>' + element[i] + '</li>');
     });
   });
   socket.on('message', function(data) { // received one message
