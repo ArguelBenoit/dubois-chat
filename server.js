@@ -76,27 +76,16 @@ app.get('/logout',function(req,res){
 });
 
 
-var usersConnected = [];
 io.on('connection', function (socket) {
+
 	socket.on('userConnect', (data) => {
-		var present = false;
-		usersConnected.forEach(function(element){
-			if(element == data.pseudo) {
-				present = true;
-			}
-		});
-		if (present == false) {
-			usersConnected.push(data.pseudo);
-		}
+		var usersConnected = [];
+		client.sadd('clients', data.pseudo);
 		socket.on('disconnect', function() {
-			usersConnected.forEach(function(element, index){
-				if(element == data.pseudo) {
-					usersConnected.splice(index, 1);
-				}
-			});
+			client.srem('clients', data.pseudo);
     });
 	});
-	socket.emit('allConnected', usersConnected);
+
   socket.on('message', (data) => {
     var message = ent.encode(data.message);
     var date = moment().format(' DD/MM  HH:mm');
@@ -106,3 +95,8 @@ io.on('connection', function (socket) {
     client.ltrim('messages', 0, 300);
   });
 });
+
+// client.lrange('messages', 0, -1, (err, result) => {
+// 	var allMessage = JSON.stringify(result);
+// 	res.end(allMessage);
+// });

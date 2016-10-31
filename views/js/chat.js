@@ -104,13 +104,7 @@ $(document).ready(function(){
     });
   });
 
-  socket.on('allConnected', function(data){
-    console.log(data);
-    data.forEach(function(element) {
-      var i;
-      $('#list-users-ul').append('<li>' + element[i] + '</li>');
-    });
-  });
+
   socket.on('message', function(data) { // received one message
     insereFormatMessage(data.pseudo, data.message, data.date, pseudoCourant, 'append');
     if(data.pseudo != pseudoCourant) {
