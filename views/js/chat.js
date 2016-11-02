@@ -73,6 +73,18 @@ $(document).ready(function(){
 
 
   $('#all-users').click(function() {
+    $('#list-users-ul').html(' ');
+    $.post(location + '/connected', false, function(a) {
+      var allConnected = JSON.parse(a);
+      allConnected.sort();
+      $('#list-users-ul').append('<li class="legend">Utilisateurs connectés<span class="connected-status second">' + (allConnected.length) + '</span></li>');
+      $('#list-users-ul').append('<li>' + pseudoCourant + ' (vous)<span class="connected-status">-- <i class="fa fa-plug" aria-hidden="true"></i></span></li>');
+      allConnected.forEach(function(element) {
+        if (element != pseudoCourant) {
+          $('#list-users-ul').append('<li>' + element + '<span class="connected-status">-- <i class="fa fa-plug" aria-hidden="true"></i></span></li>');
+        }
+      });
+    });
     $('#list-users').css('display', 'initial');
   });
   $('#list-users').click(function() {
@@ -102,23 +114,7 @@ $(document).ready(function(){
       });
       goToBottom();
     });
-    $.post(location + '/connected', false, function(a) {
-      var allConnected = JSON.parse(a);
-      allConnected.sort();
-      if (allConnected.length + 1 > 1) {
-        $('#list-users-ul').append('<li class="legend">Il y a '+ (allConnected.length+1) +' utilisateur(s) connecté(s)</li>');
-      } else {
-        $('#list-users-ul').append('<li class="legend">Vous êtes le seul connecté</li>');
-      }
-      $('#list-users-ul').append('<li>' + pseudoCourant + ' (vous)<span class="connected-status">-- <i class="fa fa-plug" aria-hidden="true"></i></span></li>');
-      allConnected.forEach(function(element) {
-        if (element != pseudoCourant) {
-          $('#list-users-ul').append('<li>' + element + '<span class="connected-status">-- <i class="fa fa-plug" aria-hidden="true"></i></span></li>');
-        }
-      });
-    });
   });
-
 
   socket.on('message', function(data) { // received one message
     insereFormatMessage(data.pseudo, data.message, data.date, pseudoCourant, 'append');

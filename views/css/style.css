@@ -136,18 +136,15 @@ header h3 {
   width: 300px;
   margin: 50px auto 0 auto;
   border-radius: 1px;
-  color: #333;
-  font-style: italic;
+  color: #555;
   list-style: none;
 }
 #list-users li.legend {
   font-style: normal;
   color: #222;
   background: #eaeaea;
-  text-align: center;
   margin-bottom: 5px;
   padding-bottom: 5px;
-  padding-left: 0px;
 }
 #list-users li {
   padding-left: 12px;
@@ -157,9 +154,11 @@ header h3 {
   float: right;
   text-align: right;
   color: green;
+  margin-top: 3px;
   margin-right: 10px;
   font-size: small;
 }
+#list-users li .connected-status.second { margin-top: 0px; }
 #list-users li:first-child { padding-top: 8px; }
 #list-users li:last-child { padding-bottom: 8px; }
 
