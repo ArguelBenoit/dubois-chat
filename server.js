@@ -57,6 +57,12 @@ app.post('/mess',function(req,res){
 		res.end(allMessage);
   });
 });
+app.post('/connected',function(req,res){
+	client.smembers('clients', (err, result) => {
+		var usersConnected = JSON.stringify(result);
+		res.end(usersConnected);
+	});
+});
 app.get('/chat',function(req,res){
 	sess = req.session;
 	if (sess.user) {
@@ -79,7 +85,6 @@ app.get('/logout',function(req,res){
 io.on('connection', function (socket) {
 
 	socket.on('userConnect', (data) => {
-		var usersConnected = [];
 		client.sadd('clients', data.pseudo);
 		socket.on('disconnect', function() {
 			client.srem('clients', data.pseudo);
@@ -95,8 +100,3 @@ io.on('connection', function (socket) {
     client.ltrim('messages', 0, 300);
   });
 });
-
-// client.lrange('messages', 0, -1, (err, result) => {
-// 	var allMessage = JSON.stringify(result);
-// 	res.end(allMessage);
-// });
