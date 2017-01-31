@@ -86,13 +86,13 @@ $(document).ready(function(){
       var allConnected = JSON.parse(a);
       allConnected.sort();
       $('#list-users-ul').append('<li class="legend">'+ (allConnected.length) +' utilisateurs connectés</li>');
-      allUsers.forEach(function(element){
-        $('#list-users-ul').append('<li class="'+ element.replace(" ", "_") +'"><span style="padding-left: 5px;">' + element + '</span><span style="padding-right: 5px;"class="connected-status">-- <i class="fa fa-plug" aria-hidden="true"></i></span></li>');
-      });
       allConnected.forEach(function(element) {
-        $('.' + element.replace(" ","_")).addClass(' connected');
+        $('#list-users-ul').append('<li class="connected '+ element.replace(" ", "_") +'"><span style="padding-left: 7px;"class="connected-status"><i class="fa fa-plug" aria-hidden="true"></i></span><span style="padding-left: 5px;">' + element + '</span></li>');
       });
-
+      allUsers.forEach(function(element){
+        if (allConnected.indexOf(element) == -1)
+          $('#list-users-ul').append('<li class="'+ element.replace(" ", "_") +'"><span style="padding-left: 7px;"class="connected-status"><i class="fa fa-plug" aria-hidden="true"></i></span><span style="padding-left: 5px;">' + element + '</span></li>');
+      });
     });
     $('#list-users').css('display', 'initial');
   });

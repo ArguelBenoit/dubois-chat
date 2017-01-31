@@ -14,8 +14,6 @@ html, body {
 
 
 
-
-
 #login {
   padding: 15px;
   background: white;
@@ -150,19 +148,22 @@ header h3 {
   background: #eaeaea;
   text-align: center;
   padding: 5px 0px;
+  font-weight: bold;
 }
 #list-users li:nth-of-type(2), #list-users li:nth-of-type(3) { padding-top: 4px; }
 #list-users li:last-child, #list-users li:last-child { padding-bottom: 5px; }
 #list-users li {
   margin-bottom: 0px;
-  opacity: 0.6;
+  opacity: 0.4;
   width: 50%;
   float: left;
 }
-#list-users li.connected { opacity: 1; }
+#list-users li.connected {
+  opacity: 1;
+  font-weight: bold;
+}
 #list-users li.connected .connected-status { color: green; }
 #list-users li .connected-status {
-  float: right;
   color: red;
   text-align: right;
   margin-top: 3px;
@@ -173,7 +174,7 @@ header h3 {
 
 
 #zone_chat {
-  padding: 75px 0 155px 0;
+  padding: bold 0 155px 0;
   max-height: 100%;
 }
 #zone_chat p:last-child { margin-bottom: 0px; }
@@ -221,8 +222,6 @@ header h3 {
   from { border-right: 12px solid rgba(255, 0, 0, 0.5); opacity: 0; };
   to { border-right: 4px solid rgba(255, 0, 0, 0.5);  opacity: 1; };
 }
-
-
 
 
 
