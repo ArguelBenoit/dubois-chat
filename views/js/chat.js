@@ -71,25 +71,36 @@ $(document).ready(function(){
   }
   /*_____________________________________________________________________*/
 
-
+  var allUsers = [];
+  $.post(location +'/users', false, function(data) {
+		var userAndCode = JSON.parse(data);
+		var users = Object.keys(userAndCode);
+		users.sort();
+    users.forEach(function(element) {
+      allUsers.push(element);
+    });
+	});
   $('#all-users').click(function() {
     $('#list-users-ul').html(' ');
     $.post(location + '/connected', false, function(a) {
       var allConnected = JSON.parse(a);
       allConnected.sort();
       $('#list-users-ul').append('<li class="legend">Utilisateurs connectés<span class="connected-status second">' + (allConnected.length) + '</span></li>');
-      $('#list-users-ul').append('<li>' + pseudoCourant + ' (vous)<span class="connected-status">-- <i class="fa fa-plug" aria-hidden="true"></i></span></li>');
-      allConnected.forEach(function(element) {
-        if (element != pseudoCourant) {
-          $('#list-users-ul').append('<li>' + element + '<span class="connected-status">-- <i class="fa fa-plug" aria-hidden="true"></i></span></li>');
-        }
+      allUsers.forEach(function(element){
+        $('#list-users-ul').append('<li class="'+ element.replace(" ", "_") +'">' + element + '<span class="connected-status">-- <i class="fa fa-plug" aria-hidden="true"></i></span></li>');
       });
+      allConnected.forEach(function(element) {
+        $('.' + element.replace(" ","_")).addClass(' connected');
+      });
+
     });
     $('#list-users').css('display', 'initial');
   });
   $('#list-users').click(function() {
     $("#list-users").fadeOut("100");
   });
+
+  /*_____________________________________________________________________*/
 
   $.post(location +'/sess', false, function(a) {
     if (!a) {

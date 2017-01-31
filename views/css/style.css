@@ -149,15 +149,19 @@ header h3 {
 #list-users li {
   padding-left: 12px;
   margin-bottom: 0px;
+  opacity: 0.6;
 }
-#list-users li .connected-status {
+#list-users li.connected { opacity: 1; }
+#list-users li.connected span { color: green; }
+#list-users li span {
   float: right;
+  color: red;
   text-align: right;
-  color: green;
   margin-top: 3px;
   margin-right: 10px;
   font-size: small;
 }
+
 #list-users li .connected-status.second { margin-top: 0px; }
 #list-users li:first-child { padding-top: 8px; }
 #list-users li:last-child { padding-bottom: 8px; }
