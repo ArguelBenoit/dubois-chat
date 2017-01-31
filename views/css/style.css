@@ -121,7 +121,10 @@ header h3 {
 
 
 
-
+.container-list-users {
+  width: 420px;
+  margin: auto;
+}
 #list-users {
   display: none;
   position: fixed;
@@ -133,38 +136,38 @@ header h3 {
 #list-users ul {
   transition-duration: 200ms;
   background: #fff;
-  width: 300px;
+  width: 100%;
   margin: 50px auto 0 auto;
   border-radius: 1px;
   color: #555;
   list-style: none;
+  float: left;
 }
 #list-users li.legend {
+  width: 100%;
   font-style: normal;
   color: #222;
   background: #eaeaea;
-  margin-bottom: 5px;
-  padding-bottom: 5px;
+  text-align: center;
+  padding: 5px 0px;
 }
+#list-users li:nth-of-type(2), #list-users li:nth-of-type(3) { padding-top: 4px; }
+#list-users li:last-child, #list-users li:last-child { padding-bottom: 5px; }
 #list-users li {
-  padding-left: 12px;
   margin-bottom: 0px;
   opacity: 0.6;
+  width: 50%;
+  float: left;
 }
 #list-users li.connected { opacity: 1; }
-#list-users li.connected span { color: green; }
-#list-users li span {
+#list-users li.connected .connected-status { color: green; }
+#list-users li .connected-status {
   float: right;
   color: red;
   text-align: right;
   margin-top: 3px;
-  margin-right: 10px;
   font-size: small;
 }
-
-#list-users li .connected-status.second { margin-top: 0px; }
-#list-users li:first-child { padding-top: 8px; }
-#list-users li:last-child { padding-bottom: 8px; }
 
 
 
