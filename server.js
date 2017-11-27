@@ -8,7 +8,7 @@ var	bodyParser = require('body-parser');
 var ent = require('ent');
 var moment = require('moment');
 var redis = require('redis');
-var client = redis.createClient();
+var client = redis.createClient('6379', 'redis');
 
 
 app.use(function(req, res, next) {
