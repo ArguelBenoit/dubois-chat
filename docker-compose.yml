@@ -10,11 +10,6 @@ services:
     - "3000:80"
     depends_on:
     - app
-  
-  redis:
-    image: redis:3
-    volumes:
-    - ./redis:/redis
 
   app:
     image: node:6
@@ -23,6 +18,14 @@ services:
     - ./:/usr/app
     - ./views/:/usr/app/views
     - /usr/app/node_modules
+    # ports:
+    # - "3000:3000"
     command: npm run deploy
     depends_on:
     - redis
+    
+  redis:
+    image: redis:latest
+    # command: redis-server --appendonly yes
+    volumes:
+    - ./redis/dump.rdb:/data/dump.rdb
