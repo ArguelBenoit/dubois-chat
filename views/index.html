@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html>
 	<head>
 		<title>Messagerie Dubois</title>
@@ -20,7 +21,6 @@
 			body {
 				width: 100%;
 				height: 100%;
-				background: black;
 			}
 			@media only screen and (max-device-width: 480px) { body { background: white; }}
 		</style>
@@ -28,10 +28,14 @@
 
 	<body>
     <div id="login">
-      <img class="u-pull-left feather" src="img/feather100x100.png" width="35px" height="35px"/>
+      <img class="u-pull-left feather" src="img/feather100x100.png" width="35" height="35" alt="" />
       <h4 class="u-pull-left">Messagerie Dubois</h4>
       <form action="/" method="post" id="formulaire_login">
-				<select class="u-full-width connect_element" id="user"><option value="Prénom">Prénom Nom</option></select>
+				<select class="u-full-width connect_element" id="user">
+					<option value="Prénom">
+						Prénom Nom
+					</option>
+				</select>
 				<input class="u-full-width connect_element" type="password" size="40" placeholder="Code vendeur" id="code">
 				<input class="button-primary u-full-width" type="button" value="Connexion" id="submit">
       </form>

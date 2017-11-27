@@ -1,13 +1,9 @@
 
 $(document).ready(function(){
   var pseudoCourant;
-  var location;
-  if (window.location.hostname == 'localhost') {
-    location = 'http://'+ window.location.hostname + ':3000';
-  } else {
-    location = 'http://'+ window.location.hostname; //because in production nginx redirect automaticaly all request on port 3000
-  }
-  var socket = io.connect(location +'/');
+  var location = 'http://' + window.location.hostname;
+  var socket = io.connect(location);
+
   /*_____________________________________________________________________*/
 
   function spawnNotification(theBody, theIcon, theTitle) {

@@ -2,12 +2,7 @@
 $(document).ready(function(){
 	var user;
 	var code;
-	var location;
-  if (window.location.hostname == 'localhost') {
-    location = 'http://'+ window.location.hostname + ':3000';
-  } else {
-    location = 'http://'+ window.location.hostname; //because in production nginx redirect automaticaly all request on port 3000
-  }
+	var location = 'http://' + window.location.hostname;
 
 	$.post(location +'/users', false, function(data) {
 		var userAndCode = JSON.parse(data);
