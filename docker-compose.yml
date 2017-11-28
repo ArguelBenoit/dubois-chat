@@ -21,11 +21,8 @@ services:
     command: npm run deploy
     depends_on:
     - redis
-  
-  # À corriger :
-  # les nouvelles données ne sont pas récupéré et donc perdu après un nouveau up ou build.
+
   redis:
     image: redis:latest
-    # command: redis-server
     volumes:
-    - ./redis/dump.rdb:/data/dump.rdb
+    - ./redis:/data
